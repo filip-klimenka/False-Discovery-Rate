@@ -6,6 +6,8 @@ public class Bootstrap {
     // generate some pseudo data
     int n = 100;
     double[] data = simulateNormal(n);
+    // compute the mean
+    double mean = getMean(data);
 
     //double theta1 = randomGenerator.nextDouble ();
 
@@ -25,6 +27,16 @@ public class Bootstrap {
         return uniform;
     }
 
+
+    public double getMean(double[] m)
+    {
+        double sum = 0;
+        for (int i = 0; i < m.length; i++) {
+            sum += m[i];
+        }
+        return sum / m.length;
+    }
+
     public static void main(String[] args)
     {
         Bootstrap b = new Bootstrap();
@@ -37,13 +49,7 @@ public class Bootstrap {
             System.out.println(i);
     }
 
-    public double mean(double[] m) {
-        double sum = 0;
-        for (int i = 0; i < m.length; i++) {
-            sum += m[i];
-        }
-        return sum / m.length;
-    }
+
 
     /**
      *n = 100; x = randn(n,1);
