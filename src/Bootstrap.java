@@ -36,6 +36,15 @@ public class Bootstrap {
         for (int i : u)
             System.out.println(i);
     }
+
+    public double mean(double[] m) {
+        double sum = 0;
+        for (int i = 0; i < m.length; i++) {
+            sum += m[i];
+        }
+        return sum / m.length;
+    }
+
     /**
      *n = 100; x = randn(n,1);
      % Mean of x
