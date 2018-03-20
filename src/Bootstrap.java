@@ -8,6 +8,9 @@ public class Bootstrap {
     double[] data = simulateNormal(n);
     // compute the mean
     double mean = getMean(data);
+    int B = 1000;               // bootstrap repetitions
+    int[] muStar = new int[B];  // place holder for bootstrapped means
+
 
     //double theta1 = randomGenerator.nextDouble ();
 
