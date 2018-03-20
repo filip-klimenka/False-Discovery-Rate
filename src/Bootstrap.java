@@ -29,8 +29,7 @@ public class Bootstrap {
             uniform[i] = randomGenerator.nextInt(K);
         return uniform;
     }
-
-
+    
     public double getMean(double[] m)
     {
         double sum = 0;
