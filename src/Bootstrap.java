@@ -20,6 +20,25 @@ public class Bootstrap {
         return xStar;
     }
 
+    public double[] getStationaryBootstrapSample()
+    {
+        double xStar[] = new double[n];
+        /**
+         *   w = 10
+             indices = np.zeros(P, dtype=np.int64)
+             indices[0] = np.random.randint(low = 0, high = P-1)
+             for i in range(1, P):
+             if np.random.uniform() < (1 / w):
+             indices[i] = np.random.randint(low = 0, high = P-1)
+             else:
+             indices[i] = indices[i-1] + 1
+             indices[indices > (P-1)] = indices[indices > (P-1)] - (P-1)
+             return indices
+         * */
+        return xStar;
+    }
+
+
     public double[] getIIDBootstrapMean()
     {
         // place holder for bootstrapped means
@@ -34,8 +53,8 @@ public class Bootstrap {
 
     public static void main(String[] args)
     {
-        Bootstrap b = new Bootstrap();
-        double muStar[] = b.getIIDBootstrapMean();
+        Bootstrap bs = new Bootstrap();
+        double muStar[] = bs.getIIDBootstrapMean();
 //        for (double m : muStar)
 //            System.out.println(m);
         System.out.println("IID bootstrap mean is " + stats.getMean(muStar));
