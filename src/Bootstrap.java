@@ -1,4 +1,4 @@
-
+import java.util.Stack;
 
 public class Bootstrap {
     // data parameters
@@ -15,7 +15,7 @@ public class Bootstrap {
         this.n = x.length;
     }
 
-
+    // Functional interface to pass bootstrap a function
     interface BootstrapFunc {
         double computeStatistic(double data[]);
     }
@@ -35,29 +35,47 @@ public class Bootstrap {
     public double[] getStationaryIndex()
     {
         double xStar[] = new double[n];
-        /**
-         *   w = 10
-             indices = np.zeros(P, dtype=np.int64)
-             indices[0] = np.random.randint(low = 0, high = P-1)
-             for i in range(1, P):
-             if np.random.uniform() < (1 / w):
-             indices[i] = np.random.randint(low = 0, high = P-1)
-             else:
-             indices[i] = indices[i-1] + 1
-             indices[indices > (P-1)] = indices[indices > (P-1)] - (P-1)
-             return indices
-         * */
+        int w = 10;     // block size
+        int[] indices = new int[n];
+        // the code below makes block sizes in indices
+        // exponentially distributed with mean m
+        indices[0] = Stats.randomGenerator.nextInt(n-1);
+        for (int i = 1; i < n; i++)
+        {
+            double rw = Stats.randomGenerator.nextDouble();
+            if (rw < (1.0 / w))
+                indices[i] = Stats.randomGenerator.nextInt(n-1);
+            else
+                indices[i] = indices[i-1] + 1;
+                if (indices[i] > (n-1))
+                    indices[i] = indices[i] - (n-1);
+        }
+        // get values associated with indices
+        for (int i : indices)
+            xStar[i] = x[i];
         return xStar;
     }
 
 
     public double[] IID(BootstrapFunc bf)
     {
-        // placeholder for bootstrapped means
+        // placeholder for bootstrap statistics
         bsample = new double[B];
         for (int b = 0; b < B; b++)
         {
             double xStar[]  = getIIDindex();
+            bsample[b] = bf.computeStatistic(xStar);
+        }
+        return bsample;
+    }
+
+    public double[] Stationary(BootstrapFunc bf)
+    {
+        // placeholder for bootstrap statistics
+        bsample = new double[B];
+        for (int b = 0; b < B; b++)
+        {
+            double xStar[]  = getStationaryIndex();
             bsample[b] = bf.computeStatistic(xStar);
         }
         return bsample;
@@ -69,9 +87,8 @@ public class Bootstrap {
         double[] x = Stats.simulateNormal(n);
         Bootstrap bs = new Bootstrap(x);
         double muStar[] = bs.IID(Stats :: getMean);
-//        for (double m : muStar)
-//            System.out.println(m);
         System.out.println("IID bootstrap mean is " + Stats.getMean(muStar));
-//        Stats stats = new Stats();
+        double muStar2[] = bs.Stationary(Stats :: getMean);
+        System.out.println("Stationary bootstrap mean is " + Stats.getMean(muStar2));
     }
 }
