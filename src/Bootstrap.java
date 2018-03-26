@@ -1,12 +1,12 @@
 
 
 public class Bootstrap {
-    // data
+    // data parameters
     int n;
     double x[];
     // bootstrap repetitions
     int B = 1000;
-    // container for boostrapped distribution
+    // container for bootstrapped distribution
     double[] bsample;
     
     public Bootstrap(double x[])
@@ -19,7 +19,6 @@ public class Bootstrap {
     interface BootstrapFunc {
         double computeStatistic(double data[]);
     }
-
 
 
     public double[] getIIDindex()
@@ -54,7 +53,7 @@ public class Bootstrap {
 
     public double[] IID(BootstrapFunc bf)
     {
-        // place holder for bootstrapped means
+        // placeholder for bootstrapped means
         bsample = new double[B];
         for (int b = 0; b < B; b++)
         {
