@@ -1,10 +1,11 @@
 
+
 public class Bootstrap {
     // helper functions
-    static Stats stats = new Stats();
+    //static Stats stats = new Stats();
     // generate some pseudo data
     int n = 100;
-    double[] x = stats.simulateNormal(n);
+    double[] x = Stats.simulateNormal(n);
     // bootstrap repetitions
     int B = 1000;
 
@@ -12,7 +13,7 @@ public class Bootstrap {
     public double[] getIIDBootstrapSample()
     {
         // Uniform random numbers over 1...n
-        int u[] = stats.simulateUniform(n, n);
+        int u[] = Stats.simulateUniform(n, n);
         // x-star sample simulation
         double xStar[] = new double[n];
         for (int i : u)
@@ -46,7 +47,7 @@ public class Bootstrap {
         for (int b = 0; b < B; b++)
         {
             double xStar[]  = getIIDBootstrapSample();
-            muStar[b] = stats.getMean(xStar);
+            muStar[b] = Stats.getMean(xStar);
         }
         return muStar;
     }
@@ -57,7 +58,7 @@ public class Bootstrap {
         double muStar[] = bs.getIIDBootstrapMean();
 //        for (double m : muStar)
 //            System.out.println(m);
-        System.out.println("IID bootstrap mean is " + stats.getMean(muStar));
+        System.out.println("IID bootstrap mean is " + Stats.getMean(muStar));
 //        Stats stats = new Stats();
     }
 

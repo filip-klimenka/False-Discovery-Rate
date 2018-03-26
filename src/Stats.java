@@ -20,7 +20,7 @@ public class Stats {
     // random generator for bootstrap
     static Random randomGenerator = new Random(26031974);
 
-    public double getMean(double[] a)
+    static double getMean(double[] a)
     {
         double sum = 0;
         for (int i = 0; i < a.length; i++) {
@@ -29,7 +29,7 @@ public class Stats {
         return sum / a.length;
     }
 
-    public double[] simulateNormal(int size)
+    static double[] simulateNormal(int size)
     {
         double[] normal = new double[size];
         for (int i = 0; i < size; i++)
@@ -37,7 +37,7 @@ public class Stats {
         return normal;
     }
 
-    public int[] simulateUniform(int size, int N)
+    static int[] simulateUniform(int size, int N)
     {
         int[] uniform = new int[size];
         for (int i = 0; i < size; i++)
