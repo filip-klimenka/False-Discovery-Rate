@@ -1,18 +1,30 @@
 
 
 public class Bootstrap {
-    // helper functions
-    //static Stats stats = new Stats();
-    // generate some pseudo data
-    int n = 100;
-    double[] x = Stats.simulateNormal(n);
+    // data
+    int n;
+    double x[];
     // bootstrap repetitions
     int B = 1000;
-
-
-    public double[] getIIDBootstrapSample()
+    // container for boostrapped distribution
+    double[] bsample;
+    
+    public Bootstrap(double x[])
     {
-        // Uniform random numbers over 1...n
+        this.x = x;
+        this.n = x.length;
+    }
+
+
+    interface BootstrapFunc {
+        double computeStatistic(double data[]);
+    }
+
+
+
+    public double[] getIIDindex()
+    {
+        // Uniform random numbers over 1...n.
         int u[] = Stats.simulateUniform(n, n);
         // x-star sample simulation
         double xStar[] = new double[n];
@@ -21,7 +33,7 @@ public class Bootstrap {
         return xStar;
     }
 
-    public double[] getStationaryBootstrapSample()
+    public double[] getStationaryIndex()
     {
         double xStar[] = new double[n];
         /**
@@ -40,32 +52,27 @@ public class Bootstrap {
     }
 
 
-    public double[] getIIDBootstrapMean()
+    public double[] IID(BootstrapFunc bf)
     {
         // place holder for bootstrapped means
-        double muStar[] = new double[B];
+        bsample = new double[B];
         for (int b = 0; b < B; b++)
         {
-            double xStar[]  = getIIDBootstrapSample();
-            muStar[b] = Stats.getMean(xStar);
+            double xStar[]  = getIIDindex();
+            bsample[b] = bf.computeStatistic(xStar);
         }
-        return muStar;
+        return bsample;
     }
 
     public static void main(String[] args)
     {
-        Bootstrap bs = new Bootstrap();
-        double muStar[] = bs.getIIDBootstrapMean();
+        int n = 100;
+        double[] x = Stats.simulateNormal(n);
+        Bootstrap bs = new Bootstrap(x);
+        double muStar[] = bs.IID(Stats :: getMean);
 //        for (double m : muStar)
 //            System.out.println(m);
         System.out.println("IID bootstrap mean is " + Stats.getMean(muStar));
 //        Stats stats = new Stats();
     }
-
-
-
-
-
-
-
 }
