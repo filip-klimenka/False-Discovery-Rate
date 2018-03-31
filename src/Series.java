@@ -37,6 +37,7 @@ public class Series<Index, Values> {
 //        System.out.println(price_series);
 //        for (Double v : price_series.values)
 //            System.out.println(v);
+        
 
     }
 
