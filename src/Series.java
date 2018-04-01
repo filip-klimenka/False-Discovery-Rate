@@ -40,6 +40,7 @@ public class Series<Index, Values> {
 //        for (Double v : price_series.values)
 //            System.out.println(v);
 
+
     }
 
 
