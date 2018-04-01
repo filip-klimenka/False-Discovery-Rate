@@ -5,9 +5,10 @@ public class Series<Index, Values> {
 
     ArrayList<Index> index;
     ArrayList<Values> values;
+    String name;
     int length;
 
-    public Series(ArrayList<Index> index, ArrayList<Values> values) throws Exception
+    public Series(ArrayList<Index> index, ArrayList<Values> values, String name) throws Exception
     {
         // check 1: equivalent length of index and values
         if (index.size() != values.size())
@@ -19,6 +20,7 @@ public class Series<Index, Values> {
 
         this.index = index;
         this.values = values;
+        this.name = name;
         length = index.size();
     }
 
@@ -28,7 +30,7 @@ public class Series<Index, Values> {
         CSVReader reader = new CSVReader(path);
 
         try {
-            Series<Integer, Double> price_series = new Series(reader.getDates(), reader.getPrices());
+            Series<Integer, Double> price_series = new Series(reader.getDates(), reader.getPrices(), "price");
         } catch (Exception e){
             e.printStackTrace();
         }
