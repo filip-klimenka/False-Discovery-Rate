@@ -8,8 +8,7 @@ import java.util.HashMap;
 
 public class CSVReader {
 
-    int length;
-    int width;
+    private int length;
     ArrayList<String> uniqueTickers;
 
     public final int PERMNO = 0;
@@ -127,7 +126,9 @@ public class CSVReader {
         }
     }
 
-
+    public int getLength() {
+        return length;
+    }
 
     public HashMap<String, ArrayList<Integer>> getPermnos() {
         return Permnos;
@@ -160,10 +161,8 @@ public class CSVReader {
 
         ArrayList<String> tickers = reader.getTickers();
         System.out.println("Number of stocks = " + tickers.size());
+
         String ticker1 = tickers.get(0);
         System.out.println("1st stock is " + ticker1);
-
-//        for (double p : reader.getPrices())
-//            System.out.println(p);
     }
 }

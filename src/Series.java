@@ -1,14 +1,14 @@
 import java.util.ArrayList;
 import java.util.HashSet;
 
-public class Series<Index, Values> {
+public class Series<Index, Value> {
 
     ArrayList<Index> index;
-    ArrayList<Values> values;
+    ArrayList<Value> values;
     String name;
     int length;
 
-    public Series(ArrayList<Index> index, ArrayList<Values> values, String name) throws Exception
+    public Series(ArrayList<Index> index, ArrayList<Value> values, String name) throws Exception
     {
         // check 1: equivalent length of index and values
         if (index.size() != values.size())
