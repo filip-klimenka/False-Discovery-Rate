@@ -29,11 +29,11 @@ public class Series<Index, Values> {
         String path = "H:\\coding\\java\\stocks_data.csv";
         CSVReader reader = new CSVReader(path);
 
-        try {
-            Series<Integer, Double> price_series = new Series(reader.getDates(), reader.getPrices(), "price");
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            Series<Integer, Double> price_series = new Series(reader.getDates(), reader.getPrices(), "price");
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
 
 
 //        System.out.println(price_series);
