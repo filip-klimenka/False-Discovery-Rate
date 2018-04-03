@@ -76,6 +76,18 @@ public class DataFrame<Index, Value> {
     }
 
 
+    public void getRow(Index index)
+    {}
+
+    public void getRow(Index i1, Index i2)
+
+    public void get(String col)
+    {}
+
+    public void get(String[] cols)
+    {}
+
+
 
 
 
