@@ -29,40 +29,40 @@ public class StepM {
     }
 
 
-    public void getSuperiorModels()
-    {
-        while (true)
-        {
-            if (A.isEmpty())
-                break;
-
-            ArrayList<Double> T_k = new ArrayList<>();
-
-            // get T_k
-            for (int b = 0; b < B; b++)
-            {
-                delta_star = getDeltaStar();
-                T_kb = getTk(); // Max of delta star
-                T_k.add(T_kb);
-            }
-
-            quantile_k = getQuantile(T_k, 1 - alpha);
-
-            if (maxActive() < quantile_k)
-                break;
-            else
-            {
-                for (String m : A)
-                {
-                    if (delta_bar.get(m) >= quantile_k)
-                    {
-                        S.add(m);       // Adding a model to Superior set
-                        A.remove(m);    // and removing it from Active set
-                        k++;
-                    }
-                }
-            }
-        }
-    }
+//    public void getSuperiorModels()
+//    {
+//        while (true)
+//        {
+//            if (A.isEmpty())
+//                break;
+//
+//            ArrayList<Double> T_k = new ArrayList<>();
+//
+//            // get T_k
+//            for (int b = 0; b < B; b++)
+//            {
+//                delta_star = getDeltaStar();
+//                T_kb = getTk(); // Max of delta star
+//                T_k.add(T_kb);
+//            }
+//
+//            quantile_k = getQuantile(T_k, 1 - alpha);
+//
+//            if (true)//(maxActive() < quantile_k)
+//                break;
+//            else
+//            {
+//                for (String m : A)
+//                {
+//                    if (delta_bar.get(m) >= quantile_k)
+//                    {
+//                        S.add(m);       // Adding a model to Superior set
+//                        A.remove(m);    // and removing it from Active set
+//                        k++;
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }
