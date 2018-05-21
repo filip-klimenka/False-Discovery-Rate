@@ -69,7 +69,7 @@ public class DataFrame<Index, Value> {
     private void extractValues(ArrayList<Series<Index, Value>> series) {
         values = new HashMap<>();
         for (Series <Index, Value> s  : series) {
-            values.put(s.name, s.values)
+            values.put(s.name, s.values);
         }
     }
 
@@ -77,10 +77,11 @@ public class DataFrame<Index, Value> {
     public static void main(String[] args) throws Exception {
         String path = "H:\\coding\\java\\stocks_data.csv";
         CSVReader reader = new CSVReader(path);
+//        ArrayList<Series<String, Double>> series = {reader.getPrices(), };
+
 
         // DataFrame prices = new DataFrame(reader.getDates(), reader.getPrices(), reader.uniqueTickers);
     }
-
 
     public void getRow(Index index)
     {}
