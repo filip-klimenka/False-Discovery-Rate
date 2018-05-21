@@ -27,7 +27,6 @@ public class DataFrame<Index, Value> {
         extractColumns(seriesArrayList);
         extractIndex(seriesArrayList);
         extractValues(seriesArrayList);
-        extactLength(seriesArrayList);
 
     }
 
@@ -76,15 +75,16 @@ public class DataFrame<Index, Value> {
 
         // if these checks are passed set index of the DataFrame to the reference index
         this.index = refIndex;
+        this.length = refIndex.size();
 
     }
 
 
-    private void extractValues() {
+    private void extractValues(ArrayList<Series<Index, Value>> series) {
         values = new HashMap<>();
-//        for (int i  : columns) {
-//            values.put(c, series.)
-//        }
+        for (Series <Index, Value> s  : series) {
+            values.put(s.name, s.values)
+        }
     }
 
 
