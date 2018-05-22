@@ -24,21 +24,22 @@ public class Series<Index, Value> {
         length = index.size();
     }
 
-    public static void main(String[] args)
+    public static void main(String[] args) throws Exception
     {
         String path = "H:\\coding\\java\\stocks_data.csv";
         CSVReader reader = new CSVReader(path);
-
-//        try {
-//            Series<Integer, Double> price_series = new Series(reader.getDates(), reader.getPrices(), "price");
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-
-//        System.out.println(price_series);
-//        for (Double v : price_series.values)
-//            System.out.println(v);
+        // get ticker
+        String ticker = reader.getPrices().keySet().toArray()[0].toString();
+        // get prices
+        ArrayList<Double> prices = reader.getPrices().get(ticker);
+        // get dates
+        ArrayList<Integer> dates = reader.getDates().get(ticker);
+        // create series
+        Series<Integer, Double> price_series = new Series(dates, prices, ticker);
+        // printing prices
+        System.out.println(price_series);
+        for (Double v : price_series.values)
+            System.out.println(v);
 
 
     }
