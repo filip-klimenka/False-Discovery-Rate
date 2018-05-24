@@ -26,7 +26,7 @@ public class CSVReader {
     private ArrayList<Double> returns;
 
 
-    public CSVReader(String path)
+    public CSVReader(String path) throws FileNotFoundException, IOException
     {
         permnos = new ArrayList<Integer>();
         dates = new ArrayList<Integer>();
@@ -39,47 +39,29 @@ public class CSVReader {
         String line = "";
         String cvsSplitBy = ",";
 
-        try
-        {
-            br = new BufferedReader(new FileReader(path));
-            br.readLine();  // skip first line
+        br = new BufferedReader(new FileReader(path));
+        br.readLine();  // skip first line
 
-            while ((line = br.readLine()) != null) {
+        while ((line = br.readLine()) != null) {
 
-                // use comma as separator
-                String[] tokens = line.split(cvsSplitBy);
+            // use comma as separator
+            String[] tokens = line.split(cvsSplitBy);
 
-                permnos.add(Integer.valueOf(tokens[PERMNO]));
-                dates.add(Integer.valueOf(tokens[DATE]));
-                tickers.add(String.valueOf(tokens[TICKER]));
-                prices.add(Double.valueOf(tokens[PRICE]));
-                volumes.add(Double.valueOf(tokens[VOLUME]));
-                returns.add(Double.valueOf(tokens[RETURN]));
+            permnos.add(Integer.valueOf(tokens[PERMNO]));
+            dates.add(Integer.valueOf(tokens[DATE]));
+            tickers.add(String.valueOf(tokens[TICKER]));
+            prices.add(Double.valueOf(tokens[PRICE]));
+            volumes.add(Double.valueOf(tokens[VOLUME]));
+            returns.add(Double.valueOf(tokens[RETURN]));
             }
-        }
-        catch (FileNotFoundException e)
+
+        if (br != null)
         {
-            e.printStackTrace();
+            br.close();
+            length = permnos.size();
+            mapToArrays();
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            if (br != null)
-            {
-                try {
-                    br.close();
-                    length = permnos.size();
-                    mapToArrays();
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
+
 
 
     }
@@ -154,7 +136,7 @@ public class CSVReader {
         return Returns;
     }
 
-    public static void main(String args[])
+    public static void main(String args[]) throws FileNotFoundException, IOException
     {
         String path = "H:\\coding\\java\\stocks_data.csv";
         CSVReader reader = new CSVReader(path);
